@@ -1,0 +1,880 @@
+<!doctype html>
+<html lang="ko"><head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>국문 이력서 템플릿</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&amp;display=swap" rel="stylesheet">
+  <style>
+    :root { --ink:#15171a; --body:#34383e; --muted:#68707b; --line:#202020; --soft:#f4f6f8; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:#eceef1; color:var(--ink); font-family:"Noto Sans KR",system-ui,-apple-system,"Segoe UI","Apple SD Gothic Neo","Malgun Gothic",sans-serif; }
+    .toolbar { position:sticky; top:0; z-index:10; display:flex; align-items:center; gap:8px; padding:10px 16px; background:#17181a; color:#fff; box-shadow:0 3px 12px #0003; }
+    .toolbar strong { margin-right:auto; font-size:14px; }
+    .toolbar span { color:#c7c9ce; font-size:12px; }
+    .toolbar .status-error { color:#fca5a5; }
+    button { border:0; border-radius:7px; padding:8px 12px; font:600 12px inherit; cursor:pointer; background:#fff; color:#17181a; }
+    button.primary { background:#2563eb; color:#fff; }
+    #resume { outline:none; }
+    .document { width:210mm; min-height:297mm; margin:12px auto; padding:13mm 16mm; background:#fff; box-shadow:0 5px 24px #0002; overflow:visible; }
+    h1,h2,h3,p { margin:0; }
+    .name { font-size:28px; line-height:1.1; font-weight:700; letter-spacing:-.7px; }
+    .resume-header { position:relative; min-height:146px; padding-right:135px; }
+    .contact { display:flex; flex-wrap:wrap; gap:7px 18px; margin-top:9px; color:#5d6570; font-size:13.5px; line-height:1.45; font-weight:500; }
+    .contact-item { display:inline-flex; align-items:center; gap:6px; }
+    .contact-icon { display:inline-grid; place-items:center; width:17px; height:17px; }
+    .contact-icon img { display:block; width:15px; height:15px; opacity:.72; }
+    .summary { margin-top:20px; font-size:13.5px; line-height:1.62; font-weight:500; }
+    .profile-photo { position:absolute; top:0; right:0; width:115px; height:146px; overflow:hidden; border:1px dashed #aeb5bf; border-radius:8px; background:#f7f8fa; display:grid; place-items:center; }
+    .profile-photo img { display:none; width:100%; height:100%; object-fit:cover; }
+    .profile-photo.has-photo img { display:block; }
+    .profile-photo-button { position:absolute; inset:0; padding:8px; border-radius:0; background:transparent; color:#69727e; font-size:11px; line-height:1.45; }
+    .profile-photo.has-photo .profile-photo-button { display:none; }
+    .profile-photo-actions { position:absolute; right:5px; bottom:5px; left:5px; display:none; gap:4px; padding:4px; border-radius:6px; background:#111827c9; }
+    .profile-photo.has-photo .profile-photo-actions { display:flex; }
+    .profile-photo-actions button { flex:1; padding:5px 3px; border-radius:4px; background:#fff; color:#374151; font-size:9px; }
+    .profile-photo-actions button.danger { color:#b42318; }
+    .hidden-file-input { display:none !important; }
+    .resume-section { margin-top:26px; }
+    .section-heading-row { position:relative; break-after:avoid; page-break-after:avoid; }
+    .section-title { padding-bottom:7px; border-bottom:1px solid var(--line); font-size:18px; line-height:1.2; font-weight:700; letter-spacing:-.3px; }
+    .section-title small { color:var(--muted); font-size:12px; margin-left:8px; }
+    .section-add { position:absolute; right:0; top:-5px; border:1px solid #d7d9de; background:#fff; color:#4b5563; padding:6px 10px; font-size:11px; box-shadow:0 2px 8px #0000000c; }
+    .section-add:hover { border-color:#2563eb; color:#2563eb; }
+    .section-actions { position:absolute; right:0; top:-5px; display:flex; gap:5px; }
+    .section-action { border:1px solid #d7d9de; background:#fff; color:#4b5563; padding:6px 9px; font-size:11px; box-shadow:0 2px 8px #0000000c; }
+    .section-action:hover { border-color:#2563eb; color:#2563eb; }
+    .section-action.danger:hover { border-color:#efaaa6; color:#c2413b; }
+    .section-move-controls { position:absolute; right:105px; top:-5px; z-index:4; display:flex; gap:4px; padding:3px; opacity:.18; pointer-events:none; background:#ffffffed; border-radius:7px; box-shadow:0 2px 10px #00000014; transition:opacity .15s ease; }
+    .custom-section .section-move-controls { right:190px; }
+    .resume-section:hover > .section-heading-row > .section-move-controls { opacity:1; pointer-events:auto; }
+    .section-move-controls button { border:1px solid #dfe1e5; border-radius:6px; padding:4px 7px; background:#fafafa; color:#5f6874; font-size:10px; font-weight:500; }
+    .section-move-controls button:hover { color:#2563eb; border-color:#93b4ff; }
+    .item-group { position:relative; }
+    .organization { display:grid; grid-template-columns:28px 1fr; column-gap:8px; margin-top:14px; align-items:start; break-inside:avoid; page-break-inside:avoid; }
+    .org-icon,.entry-icon { width:24px; height:24px; border-radius:7px; background:var(--soft); display:grid; place-items:center; color:#5b5e64; font-size:13px; }
+    .org-icon.icon-image,.entry-icon.icon-image { background:transparent; border-radius:0; }
+    .org-icon.icon-image img,.entry-icon.icon-image img { display:block; width:20px; height:20px; object-fit:contain; opacity:.72; }
+    .org-icon.custom-image img,.entry-icon.custom-image img { width:100%; height:100%; opacity:1; }
+    .career-block .subitems .entry-icon { background:transparent; pointer-events:none; }
+    .editable-icon { cursor:pointer; transition:outline-color .15s ease,background-color .15s ease; }
+    .editable-icon:hover,.editable-icon:focus { outline:1px dashed #7da5f7; outline-offset:2px; }
+    .org-main { padding-bottom:7px; border-bottom:1px solid #e1e2e5; }
+    .org-main h2 { font-size:15.5px; line-height:1.35; font-weight:700; }
+    .meta { margin-top:2px; color:#25272a; font-size:12.4px; line-height:1.45; font-weight:500; white-space:pre-wrap; }
+    .entry { position:relative; display:grid; grid-template-columns:28px 1fr; column-gap:8px; margin-top:10px; align-items:start; break-inside:avoid; page-break-inside:avoid; }
+    .entry-icon:empty { background:transparent; }
+    .entry-body h3 { font-size:14.5px; line-height:1.45; font-weight:700; }
+    ul { margin:6px 0 0; padding:0; list-style:none; }
+    li { color:var(--body); font-size:12px; line-height:1.52; font-weight:500; }
+    li::before { content:"- "; }
+    .skills { display:flex; flex-wrap:wrap; gap:6px; margin-top:15px; }
+    .skill { position:relative; padding:6px 10px; border:1px solid #d9dade; border-radius:8px; font-size:12px; font-weight:500; }
+    .skill-controls { position:absolute; right:2px; top:-23px; z-index:4; display:none; gap:3px; padding:2px; border-radius:5px; background:#fff; box-shadow:0 2px 8px #0002; }
+    .skill:hover > .skill-controls,.skill:focus-within > .skill-controls { display:flex; }
+    .skill-controls button { padding:2px 5px; border:1px solid #dfe1e5; border-radius:4px; color:#5f6874; font-size:9px; }
+    .skill-controls button.danger { color:#b42318; }
+    .item-controls,.group-controls { position:absolute; right:0; z-index:3; display:flex; flex-wrap:wrap; gap:5px; margin:0; padding:3px; opacity:0; pointer-events:none; background:#ffffffed; border-radius:7px; box-shadow:0 2px 10px #00000018; transition:opacity .15s ease; }
+    .item-controls { top:-5px; }
+    .group-controls { top:12px; }
+    .entry:hover .item-controls,.item-group:hover > .group-controls { opacity:1; pointer-events:auto; }
+    .item-controls button,.group-controls button { padding:4px 7px; border:1px solid #dfe1e5; border-radius:6px; background:#fafafa; color:#5f6874; font-size:10px; font-weight:500; }
+    .item-controls button:hover,.group-controls button:hover { color:#2563eb; border-color:#93b4ff; }
+    .item-controls button.danger:hover,.group-controls button.danger:hover { color:#c2413b; border-color:#efaaa6; }
+    .drag-handle,.section-drag-handle { display:none !important; }
+    [contenteditable="true"]:focus { outline:2px solid #93b4ff; outline-offset:2px; border-radius:2px; }
+    .help-dialog { width:min(460px, calc(100% - 32px)); padding:0; border:0; border-radius:14px; color:var(--ink); box-shadow:0 20px 60px #0005; }
+    .help-dialog::backdrop { background:#11182799; }
+    .help-dialog-header { display:flex; align-items:center; justify-content:space-between; padding:18px 20px 12px; border-bottom:1px solid #e5e7eb; }
+    .help-dialog-header h2 { font-size:18px; }
+    .help-dialog-close { padding:5px 9px; background:#f3f4f6; color:#4b5563; }
+    .help-dialog-body { padding:16px 20px 20px; }
+    .help-dialog-body ol { margin:0; padding-left:20px; }
+    .help-dialog-body li { margin-top:8px; color:var(--body); font-size:13px; line-height:1.55; }
+    .help-dialog-body li::before { content:none; }
+    .help-dialog-note { margin-top:14px; padding:10px 12px; border-radius:8px; background:#f4f6f8; color:#59616c; font-size:12px; line-height:1.55; }
+    #resume .name:hover,#resume .contact:hover,#resume .summary:hover,#resume h2:not(.section-title):hover,#resume h3:hover,#resume .meta:hover,#resume li:hover,#resume .skill:hover { background-color:#fffbe8; }
+    @page { size:A4; margin:13mm 16mm; }
+    @media print {
+      body { background:#fff; }
+      .toolbar,.help-dialog,#resume .editor-control,#resume button { display:none !important; }
+      .profile-photo { border:0; background:transparent; }
+      .profile-photo:not(.has-photo) { display:none; }
+      .editable-icon { outline:none !important; }
+      .document { margin:0; padding:0; box-shadow:none; width:auto; min-height:0; }
+      [contenteditable="true"] *:hover { background:transparent; }
+    }
+    @media (max-width:850px) {
+      .toolbar span { display:none; }
+      .document { width:100%; min-height:auto; margin:0; padding:24px 20px; }
+      .item-controls,.group-controls { position:static; margin-top:3px; opacity:.3; pointer-events:auto; box-shadow:none; }
+      .section-move-controls { position:static; width:max-content; margin:0 0 5px auto; opacity:.35; pointer-events:auto; box-shadow:none; }
+      .skill-controls { position:static; display:flex; margin-left:5px; box-shadow:none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="toolbar">
+    <strong>국문 이력서 템플릿 편집기</strong>
+    <span id="saveStatus">글자를 클릭해 수정하세요 · 자동 저장됩니다.</span>
+    <button onclick="openHelp()">사용 방법</button>
+    <button onclick="addCustomSection()">+ 새 영역</button>
+    <button class="primary" onclick="downloadResumeHtml()">HTML 사본 저장</button>
+    <button onclick="window.print()">인쇄 PDF 저장</button>
+    <button onclick="resetResume()">초기화</button>
+  </div>
+  <dialog id="helpDialog" class="help-dialog" onclick="closeHelpFromBackdrop(event)">
+    <div class="help-dialog-header">
+      <h2>이력서 편집 방법</h2>
+      <button type="button" class="help-dialog-close" onclick="closeHelp()" aria-label="사용 방법 닫기">닫기</button>
+    </div>
+    <div class="help-dialog-body">
+      <ol>
+        <li>노란색으로 표시되는 글자를 클릭해 문서처럼 직접 수정하세요.</li>
+        <li>항목에 마우스를 올리면 추가·이동·삭제 버튼이 나타납니다.</li>
+        <li>사진이나 아이콘을 클릭하면 내 이미지로 바꿀 수 있습니다.</li>
+        <li>작업 내용은 이 브라우저에 자동 저장됩니다.</li>
+        <li>완성 후 HTML 사본 또는 인쇄 PDF로 안전하게 저장하세요.</li>
+      </ol>
+      <p class="help-dialog-note">HTML 사본에는 작성 내용과 사진이 함께 들어갑니다. 기본 아이콘을 표시하려면 HTML 파일과 icon 폴더를 같은 위치 구조로 보관하세요. 다른 사람에게 전달하기 전 연락처 등 개인정보를 확인해 주세요.</p>
+    </div>
+  </dialog>
+  <main id="resume" spellcheck="false">
+    <div class="document">
+      <header class="resume-header">
+        <h1 class="name">이름</h1>
+        <div class="contact">
+          <span class="contact-item"><span class="contact-icon" aria-hidden="true"><img src="icon/phone.svg" alt=""></span><span>010-0000-0000</span></span>
+          <span class="contact-item"><span class="contact-icon" aria-hidden="true"><img src="icon/mail.svg" alt=""></span><span>example@email.com</span></span>
+        </div>
+        <p class="summary">지원 직무와 관련된 핵심 역량, 주요 경험, 강점을 2~3문장으로 간결하게 작성하세요. 어떤 문제를 해결해 왔고 앞으로 어떤 가치를 만들고 싶은지 드러내면 좋습니다.</p>
+        <div class="profile-photo" id="profilePhotoBox" contenteditable="false" title="사진을 클릭하여 변경">
+          <img id="profilePhoto" alt="프로필 사진">
+          <button type="button" class="profile-photo-button" onclick="chooseProfilePhoto()">사진 업로드<br>권장 3:4</button>
+          <div class="profile-photo-actions editor-control" contenteditable="false">
+            <button type="button" onclick="chooseProfilePhoto()">변경</button>
+            <button type="button" class="danger" onclick="removeProfilePhoto()">삭제</button>
+          </div>
+        </div>
+      </header>
+
+      <section class="resume-section section-block" data-section-kind="education" data-section-block="true">
+        <div class="section-heading-row">
+          <h2 class="section-title">학력</h2>
+          <button type="button" class="section-add editor-control" contenteditable="false" onclick="addSectionItem(this)">+ 항목 추가</button>
+          <div class="section-move-controls editor-control" contenteditable="false"><button type="button" onclick="moveSectionBlock(this, -1)" title="영역 위로 이동">↑</button><button type="button" onclick="moveSectionBlock(this, 1)" title="영역 아래로 이동">↓</button></div>
+        </div>
+        <div class="items">
+          <div class="item-group editable-item" data-item-type="organization">
+            <div class="organization">
+              <div class="org-icon" aria-hidden="true"></div>
+              <div class="org-main"><h2>학교명</h2><div class="meta">YYYY.MM ~ YYYY.MM | 전공 | 학점(선택)</div></div>
+            </div>
+            <div class="subitems"></div>
+            <div class="group-controls editor-control" contenteditable="false"><button type="button" class="danger" onclick="removeItem(this)">항목 삭제</button></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="resume-section section-block" data-section-kind="career" data-section-block="true">
+        <div class="section-heading-row">
+          <h2 class="section-title">경력</h2>
+          <button type="button" class="section-add editor-control" contenteditable="false" onclick="addSectionItem(this)">+ 항목 추가</button>
+          <div class="section-move-controls editor-control" contenteditable="false"><button type="button" onclick="moveSectionBlock(this, -1)" title="영역 위로 이동">↑</button><button type="button" onclick="moveSectionBlock(this, 1)" title="영역 아래로 이동">↓</button></div>
+        </div>
+        <div class="items">
+          <div class="item-group editable-item career-block" data-item-type="organization" data-career-block="true">
+            <div class="organization">
+              <div class="org-icon" aria-hidden="true"></div>
+              <div class="org-main"><h2>회사·기관명</h2><div class="meta">YYYY.MM ~ YYYY.MM | 직무·직책 | 고용 형태(선택)</div></div>
+            </div>
+            <div class="subitems">
+              <article class="entry editable-item" data-item-type="entry">
+                <div class="entry-icon" aria-hidden="true"></div>
+                <div class="entry-body">
+                  <h3>담당 업무 또는 주요 프로젝트명</h3>
+                  <div class="meta">YYYY.MM ~ YYYY.MM | 역할</div>
+                  <ul><li>해결해야 했던 문제나 업무의 목표를 작성하세요</li><li>본인이 수행한 행동과 사용한 기술을 구체적으로 작성하세요</li><li>수치, 변화, 도입 여부 등 확인 가능한 성과로 마무리하세요</li></ul>
+                  <div class="item-controls editor-control" contenteditable="false"><button type="button" onclick="addBullet(this)">+ Bullet</button><button type="button" class="danger" onclick="removeItem(this)">항목 삭제</button></div>
+                </div>
+              </article>
+            </div>
+            <div class="group-controls editor-control" contenteditable="false"><button type="button" onclick="moveCareerBlock(this, -1)">↑ 위로</button><button type="button" onclick="moveCareerBlock(this, 1)">↓ 아래로</button><button type="button" onclick="addSubproject(this)">+ 세부 경험</button><button type="button" class="danger" onclick="removeItem(this)">항목 삭제</button></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="resume-section section-block" data-section-kind="project" data-section-block="true">
+        <div class="section-heading-row">
+          <h2 class="section-title">프로젝트 및 활동</h2>
+          <button type="button" class="section-add editor-control" contenteditable="false" onclick="addSectionItem(this)">+ 항목 추가</button>
+          <div class="section-move-controls editor-control" contenteditable="false"><button type="button" onclick="moveSectionBlock(this, -1)" title="영역 위로 이동">↑</button><button type="button" onclick="moveSectionBlock(this, 1)" title="영역 아래로 이동">↓</button></div>
+        </div>
+        <div class="items">
+          <article class="entry editable-item project-block" data-item-type="entry" data-project-block="true">
+            <div class="entry-icon" aria-hidden="true"></div>
+            <div class="entry-body">
+              <h3>프로젝트명 또는 활동명</h3>
+              <div class="meta">YYYY.MM ~ YYYY.MM | 소속·역할</div>
+              <ul><li>프로젝트를 시작한 배경과 목표를 작성하세요</li><li>담당한 기능, 사용 기술, 협업 방식을 작성하세요</li><li>정량적 결과나 배운 점을 구체적으로 작성하세요</li></ul>
+              <div class="item-controls editor-control" contenteditable="false"><button type="button" onclick="moveProjectBlock(this, -1)">↑ 위로</button><button type="button" onclick="moveProjectBlock(this, 1)">↓ 아래로</button><button type="button" onclick="addBullet(this)">+ Bullet</button><button type="button" class="danger" onclick="removeItem(this)">항목 삭제</button></div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="resume-section section-block" data-section-kind="award" data-section-block="true">
+        <div class="section-heading-row">
+          <h2 class="section-title">수상 내역</h2>
+          <button type="button" class="section-add editor-control" contenteditable="false" onclick="addSectionItem(this)">+ 항목 추가</button>
+          <div class="section-move-controls editor-control" contenteditable="false"><button type="button" onclick="moveSectionBlock(this, -1)" title="영역 위로 이동">↑</button><button type="button" onclick="moveSectionBlock(this, 1)" title="영역 아래로 이동">↓</button></div>
+        </div>
+        <div class="items">
+          <article class="entry editable-item" data-item-type="entry">
+            <div class="entry-icon" aria-hidden="true"></div>
+            <div class="entry-body"><h3>수상명</h3><div class="meta">YYYY.MM | 주최·수여 기관</div><ul><li>수상 배경, 평가 기준, 본인의 기여를 간단히 작성하세요</li></ul><div class="item-controls editor-control" contenteditable="false"><button type="button" onclick="addBullet(this)">+ Bullet</button><button type="button" class="danger" onclick="removeItem(this)">항목 삭제</button></div></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="resume-section section-block" data-section-kind="language" data-section-block="true">
+        <div class="section-heading-row">
+          <h2 class="section-title">언어</h2>
+          <button type="button" class="section-add editor-control" contenteditable="false" onclick="addSectionItem(this)">+ 항목 추가</button>
+          <div class="section-move-controls editor-control" contenteditable="false"><button type="button" onclick="moveSectionBlock(this, -1)" title="영역 위로 이동">↑</button><button type="button" onclick="moveSectionBlock(this, 1)" title="영역 아래로 이동">↓</button></div>
+        </div>
+        <div class="items">
+          <article class="entry editable-item" data-item-type="entry">
+            <div class="entry-icon" aria-hidden="true"></div>
+            <div class="entry-body"><h3>언어</h3><div class="meta">시험·자격명 | 등급·점수 | 취득일</div><ul></ul><div class="item-controls editor-control" contenteditable="false"><button type="button" onclick="addBullet(this)">+ Bullet</button><button type="button" class="danger" onclick="removeItem(this)">항목 삭제</button></div></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="resume-section section-block" data-section-kind="skill" data-section-block="true">
+        <div class="section-heading-row">
+          <h2 class="section-title">스킬</h2>
+          <button type="button" class="section-add editor-control" contenteditable="false" onclick="addSectionItem(this)">+ 항목 추가</button>
+          <div class="section-move-controls editor-control" contenteditable="false"><button type="button" onclick="moveSectionBlock(this, -1)" title="영역 위로 이동">↑</button><button type="button" onclick="moveSectionBlock(this, 1)" title="영역 아래로 이동">↓</button></div>
+        </div>
+        <div class="items"><div class="skills"><span class="skill">프로그래밍 언어</span><span class="skill">프레임워크</span><span class="skill">데이터·AI</span><span class="skill">클라우드·인프라</span><span class="skill">협업 도구</span></div></div>
+      </section>
+    </div>
+  </main>
+  <input id="profilePhotoInput" class="hidden-file-input" type="file" accept="image/*" onchange="renderProfilePhoto(this)">
+  <input id="iconImageInput" class="hidden-file-input" type="file" accept="image/*" onchange="renderIconImage(this)">
+  <script>
+    const storageKey = "korean-resume-template-v1";
+    const defaultSectionIcons = {
+      education: "icon/graduation-cap.svg",
+      career: "icon/briefcase-business.svg",
+      project: "icon/folder-kanban.svg",
+      award: "icon/trophy.svg",
+      language: "icon/languages.svg",
+      custom: "icon/folder-kanban.svg"
+    };
+    const sectionIconLabels = {
+      education: "학력 아이콘",
+      career: "경력 아이콘",
+      project: "프로젝트 및 활동 아이콘",
+      award: "수상 내역 아이콘",
+      language: "언어 아이콘",
+      custom: "사용자 영역 아이콘"
+    };
+    const resume = document.getElementById("resume");
+    const original = resume.innerHTML;
+    const saved = loadSavedResume();
+    if (saved) resume.innerHTML = saved;
+    removeDragFeatures();
+    initializeContactIcons();
+    initializeProjectBlocks();
+    initializeSectionIcons();
+    initializeSectionBlocks();
+    initializeOrderControls();
+    initializeEditableIcons();
+    initializeProfilePhoto();
+    initializeEditableFields();
+    if (saved) persistResume();
+    let timer;
+    resume.addEventListener("input", () => {
+      clearTimeout(timer);
+      timer = setTimeout(() => persistResume(true), 250);
+    });
+    resume.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" && event.target.closest(".single-line-editable")) {
+        event.preventDefault();
+      }
+    });
+    resume.addEventListener("paste", (event) => {
+      if (!event.target.closest(".editable-field")) return;
+      event.preventDefault();
+      const text = event.clipboardData.getData("text/plain");
+      document.execCommand("insertText", false, text);
+    });
+    function loadSavedResume() {
+      try {
+        return localStorage.getItem(storageKey);
+      } catch (error) {
+        console.error(error);
+        setSaveStatus("브라우저 자동 저장을 사용할 수 없습니다. HTML 사본으로 저장해 주세요.", true);
+        return null;
+      }
+    }
+    function clearTransientDragState() {
+      resume.querySelectorAll(".dragging, .drag-over").forEach((element) => {
+        element.classList.remove("dragging", "drag-over");
+      });
+    }
+    function removeDragFeatures() {
+      clearTransientDragState();
+      resume.querySelectorAll(".section-drag-handle, .career-drag-handle, .project-drag-handle, .drag-handle").forEach((handle) => handle.remove());
+      resume.querySelectorAll('[draggable="true"]').forEach((element) => element.removeAttribute("draggable"));
+    }
+    function initializeContactIcons() {
+      const iconSources = ["icon/phone.svg", "icon/mail.svg"];
+      resume.querySelectorAll(".contact-item").forEach((item, index) => {
+        const oldIndicator = item.querySelector(":scope > .contact-icon, :scope > .contact-label");
+        if (!oldIndicator || !iconSources[index]) return;
+        oldIndicator.className = "contact-icon";
+        oldIndicator.setAttribute("aria-hidden", "true");
+        oldIndicator.innerHTML = '<img src="' + iconSources[index] + '" alt="">';
+      });
+    }
+    function persistResume(showSuccess) {
+      removeDragFeatures();
+      try {
+        localStorage.setItem(storageKey, resume.innerHTML);
+        if (showSuccess) {
+          const now = new Date().toLocaleTimeString("ko-KR", { hour: "2-digit", minute: "2-digit" });
+          setSaveStatus("자동 저장됨 · " + now);
+        }
+        return true;
+      } catch (error) {
+        console.error(error);
+        setSaveStatus("자동 저장 공간이 부족합니다. HTML 사본을 저장해 주세요.", true);
+        return false;
+      }
+    }
+    function initializeEditableFields() {
+      const editableSelector = [
+        ".name",
+        ".contact-item > span:last-child",
+        ".summary",
+        ".section-title",
+        ".org-main h2",
+        ".meta",
+        ".entry-body h3",
+        ".entry-body li",
+        ".skills > .skill"
+      ].join(",");
+      const singleLineSelector = [
+        ".name",
+        ".contact-item > span:last-child",
+        ".section-title",
+        ".org-main h2",
+        ".entry-body h3",
+        ".skills > .skill"
+      ].join(",");
+      resume.removeAttribute("contenteditable");
+      resume.querySelectorAll(editableSelector).forEach((element) => {
+        element.classList.add("editable-field");
+        element.setAttribute("contenteditable", "true");
+      });
+      resume.querySelectorAll(singleLineSelector).forEach((element) => {
+        element.classList.add("single-line-editable");
+      });
+    }
+    function itemControls() {
+      return '<div class="item-controls editor-control" contenteditable="false">' +
+        '<button type="button" onclick="addBullet(this)">+ Bullet</button>' +
+        '<button type="button" class="danger" onclick="removeItem(this)">항목 삭제</button>' +
+      '</div>';
+    }
+    function projectMoveControls() {
+      return '<button type="button" class="project-order-control" onclick="moveProjectBlock(this, -1)">↑ 위로</button>' +
+        '<button type="button" onclick="moveProjectBlock(this, 1)">↓ 아래로</button>';
+    }
+    function initializeProjectBlocks() {
+      const projectItems = resume.querySelector('.resume-section[data-section-kind="project"] > .items');
+      if (!projectItems) return;
+      projectItems.querySelectorAll(":scope > .entry").forEach((block) => {
+        block.classList.add("project-block");
+        block.dataset.projectBlock = "true";
+        const controls = block.querySelector(".item-controls");
+        const existingMoveButton = controls && controls.querySelector('button[onclick^="moveProjectBlock"]');
+        if (existingMoveButton) existingMoveButton.classList.add("project-order-control");
+        if (controls && !controls.querySelector(".project-order-control")) {
+          controls.insertAdjacentHTML("afterbegin", projectMoveControls());
+        }
+      });
+    }
+    function initializeSectionIcons() {
+      Object.entries(defaultSectionIcons).forEach(([kind, source]) => {
+        const section = resume.querySelector('.resume-section[data-section-kind="' + kind + '"]');
+        if (!section) return;
+        const selector = kind === "career" ? ".org-icon" : ".org-icon, .entry-icon";
+        section.querySelectorAll(selector).forEach((icon) => {
+          icon.setAttribute("aria-label", sectionIconLabels[kind]);
+          if (!icon.dataset.customIcon) {
+            icon.classList.remove("custom-image");
+            icon.classList.add("icon-image");
+            icon.innerHTML = '<img src="' + source + '" alt="">';
+          }
+        });
+      });
+      resume.querySelectorAll('.resume-section[data-section-kind="career"] .subitems .entry-icon').forEach((icon) => {
+        icon.replaceChildren();
+        icon.classList.remove("editable-icon", "icon-image", "custom-image");
+        delete icon.dataset.customIcon;
+        icon.removeAttribute("role");
+        icon.removeAttribute("tabindex");
+        icon.removeAttribute("title");
+        icon.removeAttribute("onclick");
+        icon.removeAttribute("onkeydown");
+        icon.setAttribute("contenteditable", "false");
+        icon.setAttribute("aria-hidden", "true");
+        icon.dataset.iconDisabled = "true";
+      });
+    }
+    function sectionMoveControls() {
+      return '<button type="button" onclick="moveSectionBlock(this, -1)" title="영역 위로 이동">↑</button>' +
+        '<button type="button" onclick="moveSectionBlock(this, 1)" title="영역 아래로 이동">↓</button>';
+    }
+    function initializeSectionBlocks() {
+      const documentBody = resume.querySelector(".document");
+      if (!documentBody) return;
+      documentBody.querySelectorAll(":scope > .resume-section").forEach((section) => {
+        section.classList.add("section-block");
+        section.dataset.sectionBlock = "true";
+        const heading = section.querySelector(":scope > .section-heading-row");
+        if (!heading || heading.querySelector(".section-move-controls")) return;
+        const controls = document.createElement("div");
+        controls.className = "section-move-controls editor-control";
+        controls.setAttribute("contenteditable", "false");
+        controls.innerHTML = sectionMoveControls();
+        heading.appendChild(controls);
+      });
+    }
+    function allSectionBlocks() {
+      const documentBody = resume.querySelector(".document");
+      return documentBody ? Array.from(documentBody.querySelectorAll(":scope > .section-block")) : [];
+    }
+    function moveSectionBlock(button, direction) {
+      const block = button.closest(".section-block");
+      const blocks = allSectionBlocks();
+      const currentIndex = blocks.indexOf(block);
+      const target = blocks[currentIndex + direction];
+      if (!block || !target) return;
+      if (direction < 0) block.parentNode.insertBefore(block, target);
+      else block.parentNode.insertBefore(target, block);
+      persistResume();
+    }
+    function genericOrderControls() {
+      return '<button type="button" class="generic-order-control" onclick="moveSiblingItem(this, -1)">↑ 위로</button>' +
+        '<button type="button" class="generic-order-control" onclick="moveSiblingItem(this, 1)">↓ 아래로</button>';
+    }
+    function initializeOrderControls() {
+      removeDragFeatures();
+      resume.querySelectorAll(".items > .entry, .items > .item-group, .subitems > .entry").forEach((item) => {
+        const controls = item.matches(".item-group")
+          ? item.querySelector(":scope > .group-controls")
+          : item.querySelector(":scope > .entry-body > .item-controls");
+        if (!controls) return;
+        const hasOrderControls = controls.querySelector('.generic-order-control, button[onclick^="moveCareerBlock"], button[onclick^="moveProjectBlock"]');
+        if (!hasOrderControls) controls.insertAdjacentHTML("afterbegin", genericOrderControls());
+      });
+      initializeSkillControls();
+    }
+    function moveSiblingItem(button, direction) {
+      const item = button.closest(".entry, .item-group");
+      if (!item || !item.parentNode) return;
+      const siblings = Array.from(item.parentNode.children).filter((element) => element.matches(".entry, .item-group"));
+      const target = siblings[siblings.indexOf(item) + direction];
+      if (!target) return;
+      if (direction < 0) item.parentNode.insertBefore(item, target);
+      else item.parentNode.insertBefore(target, item);
+      persistResume();
+    }
+    function initializeSkillControls() {
+      resume.querySelectorAll(".skills > .skill").forEach((skill) => {
+        let controls = skill.querySelector(":scope > .skill-controls");
+        if (!controls) {
+          skill.insertAdjacentHTML("beforeend", '<span class="skill-controls editor-control" contenteditable="false"><button type="button" onclick="moveSkill(this, -1)">↑</button><button type="button" onclick="moveSkill(this, 1)">↓</button><button type="button" class="danger skill-remove-control" onclick="removeSkill(this)">삭제</button></span>');
+          return;
+        }
+        if (!controls.querySelector(".skill-remove-control")) {
+          controls.insertAdjacentHTML("beforeend", '<button type="button" class="danger skill-remove-control" onclick="removeSkill(this)">삭제</button>');
+        }
+      });
+    }
+    function moveSkill(button, direction) {
+      const skill = button.closest(".skill");
+      if (!skill || !skill.parentNode) return;
+      const skills = Array.from(skill.parentNode.querySelectorAll(":scope > .skill"));
+      const target = skills[skills.indexOf(skill) + direction];
+      if (!target) return;
+      if (direction < 0) skill.parentNode.insertBefore(skill, target);
+      else skill.parentNode.insertBefore(target, skill);
+      persistResume();
+    }
+    function removeSkill(button) {
+      const skill = button.closest(".skill");
+      if (!skill || !confirm("이 스킬을 삭제할까요?")) return;
+      skill.remove();
+      persistResume(true);
+    }
+    let selectedIconTarget = null;
+    function initializeEditableIcons() {
+      resume.querySelectorAll(".org-icon, .entry-icon").forEach((icon) => {
+        if (icon.dataset.iconDisabled) return;
+        icon.classList.add("editable-icon");
+        icon.removeAttribute("aria-hidden");
+        if (!icon.getAttribute("aria-label")) icon.setAttribute("aria-label", "아이콘 이미지 변경");
+        icon.setAttribute("contenteditable", "false");
+        icon.setAttribute("role", "button");
+        icon.setAttribute("tabindex", "0");
+        icon.setAttribute("title", "클릭하여 아이콘 이미지 변경");
+        icon.setAttribute("onclick", "chooseIconImage(this)");
+        icon.setAttribute("onkeydown", "if(event.key==='Enter'||event.key===' '){event.preventDefault();chooseIconImage(this)}");
+      });
+    }
+    function chooseIconImage(icon) {
+      selectedIconTarget = icon;
+      document.getElementById("iconImageInput").click();
+    }
+    function readFileAsDataUrl(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = () => reject(reader.error || new Error("파일을 읽을 수 없습니다."));
+        reader.readAsDataURL(file);
+      });
+    }
+    function loadImage(dataUrl) {
+      return new Promise((resolve, reject) => {
+        const image = new Image();
+        image.onload = () => resolve(image);
+        image.onerror = () => reject(new Error("이미지를 불러올 수 없습니다."));
+        image.src = dataUrl;
+      });
+    }
+    async function resizeImageFile(file, maxWidth, maxHeight, outputType, quality) {
+      if (!file.type.startsWith("image/")) throw new Error("이미지 파일만 선택할 수 있습니다.");
+      const dataUrl = await readFileAsDataUrl(file);
+      const source = await loadImage(dataUrl);
+      const scale = Math.min(1, maxWidth / source.naturalWidth, maxHeight / source.naturalHeight);
+      const width = Math.max(1, Math.round(source.naturalWidth * scale));
+      const height = Math.max(1, Math.round(source.naturalHeight * scale));
+      const canvas = document.createElement("canvas");
+      canvas.width = width;
+      canvas.height = height;
+      const context = canvas.getContext("2d");
+      if (!context) throw new Error("이미지를 처리할 수 없습니다.");
+      if (outputType === "image/jpeg") {
+        context.fillStyle = "#ffffff";
+        context.fillRect(0, 0, width, height);
+      }
+      context.drawImage(source, 0, 0, width, height);
+      return canvas.toDataURL(outputType, quality);
+    }
+    async function renderIconImage(input) {
+      const file = input.files && input.files[0];
+      if (!file || !selectedIconTarget) return;
+      const target = selectedIconTarget;
+      setSaveStatus("아이콘 이미지를 최적화하고 있습니다.");
+      try {
+        const source = await resizeImageFile(file, 192, 192, "image/png");
+        const image = document.createElement("img");
+        image.src = source;
+        image.alt = "";
+        target.replaceChildren(image);
+        target.classList.add("custom-image", "icon-image");
+        target.dataset.customIcon = "true";
+        persistResume(true);
+      } catch (error) {
+        console.error(error);
+        setSaveStatus("아이콘 이미지를 불러오지 못했습니다.", true);
+        alert("아이콘 이미지를 불러오지 못했습니다. 다른 이미지 파일을 선택해 주세요.");
+      } finally {
+        selectedIconTarget = null;
+        input.value = "";
+      }
+    }
+    function initializeProfilePhoto() {
+      const photo = resume.querySelector("#profilePhoto");
+      const box = resume.querySelector("#profilePhotoBox");
+      if (photo && box && photo.getAttribute("src")) box.classList.add("has-photo");
+    }
+    function chooseProfilePhoto() {
+      document.getElementById("profilePhotoInput").click();
+    }
+    async function renderProfilePhoto(input) {
+      const file = input.files && input.files[0];
+      if (!file) return;
+      setSaveStatus("프로필 사진을 최적화하고 있습니다.");
+      try {
+        const source = await resizeImageFile(file, 900, 1200, "image/jpeg", 0.86);
+        const photo = resume.querySelector("#profilePhoto");
+        const box = resume.querySelector("#profilePhotoBox");
+        photo.src = source;
+        box.classList.add("has-photo");
+        persistResume(true);
+      } catch (error) {
+        console.error(error);
+        setSaveStatus("프로필 사진을 불러오지 못했습니다.", true);
+        alert("프로필 사진을 불러오지 못했습니다. 다른 이미지 파일을 선택해 주세요.");
+      } finally {
+        input.value = "";
+      }
+    }
+    function removeProfilePhoto() {
+      if (!confirm("프로필 사진을 삭제할까요?")) return;
+      const photo = resume.querySelector("#profilePhoto");
+      const box = resume.querySelector("#profilePhotoBox");
+      if (!photo || !box) return;
+      photo.removeAttribute("src");
+      box.classList.remove("has-photo");
+      persistResume(true);
+    }
+    function escapeHtml(text) {
+      const element = document.createElement("div");
+      element.textContent = text;
+      return element.innerHTML;
+    }
+    function addCustomSection() {
+      const answer = prompt("새 영역의 제목을 입력하세요. 예: 자격증, 교육, 대외활동");
+      const title = answer ? answer.trim() : "";
+      if (!title) return;
+      const holder = document.createElement("div");
+      holder.innerHTML = '<section class="resume-section custom-section" data-section-kind="custom" data-custom-section="true">' +
+        '<div class="section-heading-row"><h2 class="section-title">' + escapeHtml(title) + '</h2>' +
+        '<div class="section-actions editor-control" contenteditable="false">' +
+        '<button type="button" class="section-action" onclick="addSectionItem(this)">+ 항목 추가</button>' +
+        '<button type="button" class="section-action danger" onclick="removeSection(this)">영역 삭제</button>' +
+        '</div></div><div class="items">' +
+        blankEntry("새 항목", "기간 | 역할") +
+        '</div></section>';
+      const section = holder.firstElementChild;
+      const documentBody = resume.querySelector(".document");
+      const skillSection = documentBody.querySelector('.resume-section[data-section-kind="skill"]');
+      documentBody.insertBefore(section, skillSection || null);
+      initializeSectionIcons();
+      initializeSectionBlocks();
+      initializeOrderControls();
+      initializeEditableIcons();
+      initializeEditableFields();
+      persistResume();
+      focusEditable(section.querySelector(".section-title"));
+    }
+    function removeSection(button) {
+      const section = button.closest(".custom-section");
+      if (!section || !confirm("이 영역 전체를 삭제할까요?")) return;
+      section.remove();
+      persistResume();
+    }
+    function blankEntry(title, meta) {
+      return '<article class="entry editable-item" data-item-type="entry">' +
+        '<div class="entry-icon" aria-hidden="true"></div>' +
+        '<div class="entry-body"><h3>' + title + '</h3>' +
+        '<div class="meta">' + meta + '</div>' +
+        '<ul><li>주요 역할·과정·성과를 입력하세요</li></ul>' + itemControls() + '</div>' +
+      '</article>';
+    }
+    function blankOrganization(allowProjects) {
+      const projects = allowProjects ? blankEntry("새로운 세부 경험", "기간 | 역할") : "";
+      const subprojectButton = allowProjects
+        ? '<button type="button" onclick="addSubproject(this)">+ 세부 경험</button>'
+        : "";
+      const moveControls = allowProjects
+        ? '<button type="button" onclick="moveCareerBlock(this, -1)">↑ 위로</button>' +
+          '<button type="button" onclick="moveCareerBlock(this, 1)">↓ 아래로</button>'
+        : "";
+      const groupClass = allowProjects ? "item-group editable-item career-block" : "item-group editable-item";
+      const careerAttribute = allowProjects ? ' data-career-block="true"' : "";
+      return '<div class="' + groupClass + '" data-item-type="organization"' + careerAttribute + '>' +
+        '<div class="organization"><div class="org-icon" aria-hidden="true"></div>' +
+        '<div class="org-main"><h2>' + (allowProjects ? "회사·기관명" : "학교명") + '</h2>' +
+        '<div class="meta">' + (allowProjects ? "재직 기간 | 직무" : "재학 기간 | 전공 | 학점") + '</div></div></div>' +
+        '<div class="subitems">' + projects + '</div>' +
+        '<div class="group-controls editor-control" contenteditable="false">' + moveControls + subprojectButton +
+        '<button type="button" class="danger" onclick="removeItem(this)">항목 삭제</button></div>' +
+      '</div>';
+    }
+    function allCareerBlocks() {
+      return Array.from(resume.querySelectorAll(".career-block"));
+    }
+    function swapCareerBlocks(first, second) {
+      const marker = document.createComment("career-position");
+      first.parentNode.insertBefore(marker, first);
+      second.parentNode.insertBefore(first, second);
+      marker.parentNode.insertBefore(second, marker);
+      marker.remove();
+    }
+    function moveCareerBlock(button, direction) {
+      const block = button.closest(".career-block");
+      const blocks = allCareerBlocks();
+      const currentIndex = blocks.indexOf(block);
+      const target = blocks[currentIndex + direction];
+      if (!block || !target) return;
+      if (block.parentNode === target.parentNode) {
+        if (direction < 0) block.parentNode.insertBefore(block, target);
+        else block.parentNode.insertBefore(target, block);
+      } else {
+        swapCareerBlocks(block, target);
+      }
+      persistResume();
+    }
+    function allProjectBlocks() {
+      return Array.from(resume.querySelectorAll('.resume-section[data-section-kind="project"] > .items > .project-block'));
+    }
+    function moveProjectBlock(button, direction) {
+      const block = button.closest(".project-block");
+      const blocks = allProjectBlocks();
+      const currentIndex = blocks.indexOf(block);
+      const target = blocks[currentIndex + direction];
+      if (!block || !target) return;
+      if (direction < 0) block.parentNode.insertBefore(block, target);
+      else block.parentNode.insertBefore(target, block);
+      persistResume();
+    }
+    function focusEditable(element) {
+      if (!element) return;
+      element.focus();
+      const selection = window.getSelection();
+      const range = document.createRange();
+      const editableTextNode = Array.from(element.childNodes).find((node) => node.nodeType === Node.TEXT_NODE && node.textContent.trim());
+      range.selectNodeContents(editableTextNode || element);
+      selection.removeAllRanges();
+      selection.addRange(range);
+    }
+    function addSectionItem(button) {
+      const section = button.closest(".resume-section");
+      const items = section.querySelector(":scope > .items");
+      const kind = section.dataset.sectionKind;
+      let added;
+      if (kind === "skill") {
+        const skills = items.querySelector(".skills");
+        skills.insertAdjacentHTML("beforeend", '<span class="skill">새 스킬</span>');
+        added = skills.lastElementChild;
+      } else {
+        const holder = document.createElement("div");
+        if (kind === "education") {
+          holder.innerHTML = blankOrganization(false);
+        } else if (kind === "career") {
+          holder.innerHTML = blankOrganization(true);
+        } else if (kind === "award") {
+          holder.innerHTML = blankEntry("새 수상 내역", "수상일 | 주최 기관");
+        } else if (kind === "language") {
+          holder.innerHTML = blankEntry("언어 및 수준", "시험·자격 | 취득일");
+        } else {
+          holder.innerHTML = blankEntry("새 프로젝트 및 활동", "진행 기간 | 역할");
+        }
+        added = holder.firstElementChild;
+        items.appendChild(added);
+        if (kind === "project") initializeProjectBlocks();
+        initializeSectionIcons();
+      }
+      initializeOrderControls();
+      initializeEditableIcons();
+      initializeEditableFields();
+      persistResume();
+      focusEditable(added.matches(".skill") ? added : added.querySelector("h2, h3"));
+    }
+    function addSubproject(button) {
+      const group = button.closest(".item-group");
+      const subitems = group.querySelector(":scope > .subitems");
+      subitems.insertAdjacentHTML("beforeend", blankEntry("새로운 세부 경험", "기간 | 역할"));
+      initializeSectionIcons();
+      initializeOrderControls();
+      initializeEditableIcons();
+      initializeEditableFields();
+      persistResume();
+      focusEditable(subitems.lastElementChild.querySelector("h3"));
+    }
+    function addBullet(button) {
+      const entry = button.closest(".entry");
+      const list = entry.querySelector("ul");
+      list.insertAdjacentHTML("beforeend", "<li>새로운 내용을 입력하세요</li>");
+      initializeEditableFields();
+      persistResume();
+      focusEditable(list.lastElementChild);
+    }
+    function removeItem(button) {
+      const item = button.closest(".entry, .item-group");
+      if (!item || !confirm("이 항목을 삭제할까요?")) return;
+      item.remove();
+      persistResume();
+    }
+    function resetResume() {
+      if (!confirm("저장된 수정 내용을 초기 상태로 되돌릴까요?")) return;
+      resume.innerHTML = original;
+      removeDragFeatures();
+      initializeContactIcons();
+      initializeProjectBlocks();
+      initializeSectionIcons();
+      initializeSectionBlocks();
+      initializeOrderControls();
+      initializeEditableIcons();
+      initializeProfilePhoto();
+      initializeEditableFields();
+      try {
+        localStorage.removeItem(storageKey);
+        setSaveStatus("초기 상태로 되돌렸습니다.");
+      } catch (error) {
+        console.error(error);
+        setSaveStatus("초기화했지만 브라우저 저장 내용을 지우지 못했습니다.", true);
+      }
+    }
+    function setSaveStatus(message, isError) {
+      const status = document.getElementById("saveStatus");
+      status.textContent = message;
+      status.classList.toggle("status-error", Boolean(isError));
+    }
+    function openHelp() {
+      const dialog = document.getElementById("helpDialog");
+      if (typeof dialog.showModal === "function") dialog.showModal();
+      else dialog.setAttribute("open", "");
+    }
+    function closeHelp() {
+      const dialog = document.getElementById("helpDialog");
+      if (typeof dialog.close === "function") dialog.close();
+      else dialog.removeAttribute("open");
+    }
+    function closeHelpFromBackdrop(event) {
+      if (event.target === event.currentTarget) closeHelp();
+    }
+    function buildHtmlSource() {
+      persistResume();
+      const clone = document.documentElement.cloneNode(true);
+      clone.querySelector("#resume").innerHTML = resume.innerHTML;
+      clone.querySelector("#saveStatus").textContent = "글자를 클릭해 수정하세요 · 자동 저장됩니다.";
+      clone.querySelector("#saveStatus").classList.remove("status-error");
+      clone.querySelector("#helpDialog").removeAttribute("open");
+      return "<!doctype html>\n" + clone.outerHTML;
+    }
+    function downloadResumeHtml() {
+      try {
+        const html = buildHtmlSource();
+        const blob = new Blob([html], { type: "text/html;charset=utf-8" });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        const rawName = resume.querySelector(".name").textContent.trim() || "나의";
+        const safeName = rawName.replace(/[\\/:*?"<>|]/g, "_");
+        link.href = url;
+        link.download = safeName + "_이력서.html";
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+        setTimeout(() => URL.revokeObjectURL(url), 1000);
+        setSaveStatus("HTML 사본 저장됨 · icon 폴더와 함께 보관하세요.");
+      } catch (error) {
+        console.error(error);
+        setSaveStatus("HTML 사본을 저장하지 못했습니다.", true);
+        alert("HTML 사본을 저장하지 못했습니다. 다시 시도해 주세요.");
+      }
+    }
+  </script>
+
+
+</body></html>
