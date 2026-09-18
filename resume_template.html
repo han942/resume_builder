@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ko"><head>
+<html lang="ko" data-icons-embedded="true"><head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>국문 이력서 템플릿</title>
@@ -15,7 +15,6 @@
     .toolbar span { color:#c7c9ce; font-size:12px; }
     .toolbar .status-error { color:#fca5a5; }
     button { border:0; border-radius:7px; padding:8px 12px; font:600 12px inherit; cursor:pointer; background:#fff; color:#17181a; }
-    button.primary { background:#2563eb; color:#fff; }
     #resume { outline:none; }
     .document { width:210mm; min-height:297mm; margin:12px auto; padding:13mm 16mm; background:#fff; box-shadow:0 5px 24px #0002; overflow:visible; }
     h1,h2,h3,p { margin:0; }
@@ -120,7 +119,6 @@
     <span id="saveStatus">글자를 클릭해 수정하세요 · 자동 저장됩니다.</span>
     <button onclick="openHelp()">사용 방법</button>
     <button onclick="addCustomSection()">+ 새 영역</button>
-    <button class="primary" onclick="downloadResumeHtml()">HTML 사본 저장</button>
     <button onclick="window.print()">인쇄 PDF 저장</button>
     <button onclick="resetResume()">초기화</button>
   </div>
@@ -135,9 +133,9 @@
         <li>항목에 마우스를 올리면 추가·이동·삭제 버튼이 나타납니다.</li>
         <li>사진이나 아이콘을 클릭하면 내 이미지로 바꿀 수 있습니다.</li>
         <li>작업 내용은 이 브라우저에 자동 저장됩니다.</li>
-        <li>완성 후 HTML 사본 또는 인쇄 PDF로 안전하게 저장하세요.</li>
+        <li>완성 후 인쇄 PDF 저장 버튼으로 제출용 PDF를 만드세요.</li>
       </ol>
-      <p class="help-dialog-note">HTML 사본에는 작성 내용과 사진이 함께 들어갑니다. 기본 아이콘을 표시하려면 HTML 파일과 icon 폴더를 같은 위치 구조로 보관하세요. 다른 사람에게 전달하기 전 연락처 등 개인정보를 확인해 주세요.</p>
+      <p class="help-dialog-note">이 HTML 파일에는 기본 아이콘이 내장되어 있어 icon 폴더 없이도 사용할 수 있습니다. 다른 사람에게 전달하기 전 연락처 등 개인정보를 확인해 주세요.</p>
     </div>
   </dialog>
   <main id="resume" spellcheck="false">
@@ -145,8 +143,8 @@
       <header class="resume-header">
         <h1 class="name">이름</h1>
         <div class="contact">
-          <span class="contact-item"><span class="contact-icon" aria-hidden="true"><img src="icon/phone.svg" alt=""></span><span>010-0000-0000</span></span>
-          <span class="contact-item"><span class="contact-icon" aria-hidden="true"><img src="icon/mail.svg" alt=""></span><span>example@email.com</span></span>
+          <span class="contact-item"><span class="contact-icon" aria-hidden="true"></span><span>010-0000-0000</span></span>
+          <span class="contact-item"><span class="contact-icon" aria-hidden="true"></span><span>example@email.com</span></span>
         </div>
         <p class="summary">지원 직무와 관련된 핵심 역량, 주요 경험, 강점을 2~3문장으로 간결하게 작성하세요. 어떤 문제를 해결해 왔고 앞으로 어떤 가치를 만들고 싶은지 드러내면 좋습니다.</p>
         <div class="profile-photo" id="profilePhotoBox" contenteditable="false" title="사진을 클릭하여 변경">
@@ -240,7 +238,7 @@
 
       <section class="resume-section section-block" data-section-kind="language" data-section-block="true">
         <div class="section-heading-row">
-          <h2 class="section-title">언어</h2>
+          <h2 class="section-title">어학</h2>
           <button type="button" class="section-add editor-control" contenteditable="false" onclick="addSectionItem(this)">+ 항목 추가</button>
           <div class="section-move-controls editor-control" contenteditable="false"><button type="button" onclick="moveSectionBlock(this, -1)" title="영역 위로 이동">↑</button><button type="button" onclick="moveSectionBlock(this, 1)" title="영역 아래로 이동">↓</button></div>
         </div>
@@ -274,6 +272,16 @@
       language: "icon/languages.svg",
       custom: "icon/folder-kanban.svg"
     };
+    const embeddedIconSources = {
+      "icon/phone.svg": "data:image/svg+xml;base64,PHN2ZwogIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIKICB3aWR0aD0iMjQiCiAgaGVpZ2h0PSIyNCIKICB2aWV3Qm94PSIwIDAgMjQgMjQiCiAgZmlsbD0ibm9uZSIKICBzdHJva2U9ImN1cnJlbnRDb2xvciIKICBzdHJva2Utd2lkdGg9IjIiCiAgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIgogIHN0cm9rZS1saW5lam9pbj0icm91bmQiCj4KICA8cGF0aCBkPSJNMTMuODMyIDE2LjU2OGExIDEgMCAwIDAgMS4yMTMtLjMwM2wuMzU1LS40NjVBMiAyIDAgMCAxIDE3IDE1aDNhMiAyIDAgMCAxIDIgMnYzYTIgMiAwIDAgMS0yIDJBMTggMTggMCAwIDEgMiA0YTIgMiAwIDAgMSAyLTJoM2EyIDIgMCAwIDEgMiAydjNhMiAyIDAgMCAxLS44IDEuNmwtLjQ2OC4zNTFhMSAxIDAgMCAwLS4yOTIgMS4yMzMgMTQgMTQgMCAwIDAgNi4zOTIgNi4zODQiIC8+Cjwvc3ZnPgo=",
+      "icon/mail.svg": "data:image/svg+xml;base64,PHN2ZwogIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIKICB3aWR0aD0iMjQiCiAgaGVpZ2h0PSIyNCIKICB2aWV3Qm94PSIwIDAgMjQgMjQiCiAgZmlsbD0ibm9uZSIKICBzdHJva2U9ImN1cnJlbnRDb2xvciIKICBzdHJva2Utd2lkdGg9IjIiCiAgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIgogIHN0cm9rZS1saW5lam9pbj0icm91bmQiCj4KICA8cGF0aCBkPSJtMjIgNy04Ljk5MSA1LjcyN2EyIDIgMCAwIDEtMi4wMDkgMEwyIDciIC8+CiAgPHJlY3QgeD0iMiIgeT0iNCIgd2lkdGg9IjIwIiBoZWlnaHQ9IjE2IiByeD0iMiIgLz4KPC9zdmc+Cg==",
+      "icon/graduation-cap.svg": "data:image/svg+xml;base64,PHN2ZwogIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIKICB3aWR0aD0iMjQiCiAgaGVpZ2h0PSIyNCIKICB2aWV3Qm94PSIwIDAgMjQgMjQiCiAgZmlsbD0ibm9uZSIKICBzdHJva2U9ImN1cnJlbnRDb2xvciIKICBzdHJva2Utd2lkdGg9IjIiCiAgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIgogIHN0cm9rZS1saW5lam9pbj0icm91bmQiCj4KICA8cGF0aCBkPSJNMjEuNDIgMTAuOTIyYTEgMSAwIDAgMC0uMDE5LTEuODM4TDEyLjgzIDUuMThhMiAyIDAgMCAwLTEuNjYgMEwyLjYgOS4wOGExIDEgMCAwIDAgMCAxLjgzMmw4LjU3IDMuOTA4YTIgMiAwIDAgMCAxLjY2IDB6IiAvPgogIDxwYXRoIGQ9Ik0yMiAxMHY2IiAvPgogIDxwYXRoIGQ9Ik02IDEyLjVWMTZhNiAzIDAgMCAwIDEyIDB2LTMuNSIgLz4KPC9zdmc+Cg==",
+      "icon/briefcase-business.svg": "data:image/svg+xml;base64,PHN2ZwogIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIKICB3aWR0aD0iMjQiCiAgaGVpZ2h0PSIyNCIKICB2aWV3Qm94PSIwIDAgMjQgMjQiCiAgZmlsbD0ibm9uZSIKICBzdHJva2U9ImN1cnJlbnRDb2xvciIKICBzdHJva2Utd2lkdGg9IjIiCiAgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIgogIHN0cm9rZS1saW5lam9pbj0icm91bmQiCj4KICA8cGF0aCBkPSJNMTIgMTJoLjAxIiAvPgogIDxwYXRoIGQ9Ik0xNiA2VjRhMiAyIDAgMCAwLTItMmgtNGEyIDIgMCAwIDAtMiAydjIiIC8+CiAgPHBhdGggZD0iTTIyIDEzYTE4LjE1IDE4LjE1IDAgMCAxLTIwIDAiIC8+CiAgPHJlY3Qgd2lkdGg9IjIwIiBoZWlnaHQ9IjE0IiB4PSIyIiB5PSI2IiByeD0iMiIgLz4KPC9zdmc+Cg==",
+      "icon/folder-kanban.svg": "data:image/svg+xml;base64,PHN2ZwogIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIKICB3aWR0aD0iMjQiCiAgaGVpZ2h0PSIyNCIKICB2aWV3Qm94PSIwIDAgMjQgMjQiCiAgZmlsbD0ibm9uZSIKICBzdHJva2U9ImN1cnJlbnRDb2xvciIKICBzdHJva2Utd2lkdGg9IjIiCiAgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIgogIHN0cm9rZS1saW5lam9pbj0icm91bmQiCj4KICA8cGF0aCBkPSJNNCAyMGgxNmEyIDIgMCAwIDAgMi0yVjhhMiAyIDAgMCAwLTItMmgtNy45M2EyIDIgMCAwIDEtMS42Ni0uOWwtLjgyLTEuMkEyIDIgMCAwIDAgNy45MyAzSDRhMiAyIDAgMCAwLTIgMnYxM2MwIDEuMS45IDIgMiAyWiIgLz4KICA8cGF0aCBkPSJNOCAxMHY0IiAvPgogIDxwYXRoIGQ9Ik0xMiAxMHYyIiAvPgogIDxwYXRoIGQ9Ik0xNiAxMHY2IiAvPgo8L3N2Zz4K",
+      "icon/trophy.svg": "data:image/svg+xml;base64,PHN2ZwogIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIKICB3aWR0aD0iMjQiCiAgaGVpZ2h0PSIyNCIKICB2aWV3Qm94PSIwIDAgMjQgMjQiCiAgZmlsbD0ibm9uZSIKICBzdHJva2U9ImN1cnJlbnRDb2xvciIKICBzdHJva2Utd2lkdGg9IjIiCiAgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIgogIHN0cm9rZS1saW5lam9pbj0icm91bmQiCj4KICA8cGF0aCBkPSJNMTAgMTQuNjZWMTdhMSAxIDAgMCAxLTEgMSAyIDIgMCAwIDAtMiAydjIiIC8+CiAgPHBhdGggZD0iTTE0IDE0LjY2VjE3YTEgMSAwIDAgMCAxIDEgMiAyIDAgMCAxIDIgMnYyIiAvPgogIDxwYXRoIGQ9Ik0xNy45MTYgMTBIMTkuNUEyLjUgMi41IDAgMCAwIDIyIDcuNVY1YTEgMSAwIDAgMC0xLTFoLTMiIC8+CiAgPHBhdGggZD0iTTQgMjJoMTYiIC8+CiAgPHBhdGggZD0iTTYgOWE2IDYgMCAwIDAgMTIgMFYzYTEgMSAwIDAgMC0xLTFIN2ExIDEgMCAwIDAtMSAxeiIgLz4KICA8cGF0aCBkPSJNNi4wODQgMTBINC41QTIuNSAyLjUgMCAwIDEgMiA3LjVWNWExIDEgMCAwIDEgMS0xaDMiIC8+Cjwvc3ZnPgo=",
+      "icon/languages.svg": "data:image/svg+xml;base64,PHN2ZwogIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIKICB3aWR0aD0iMjQiCiAgaGVpZ2h0PSIyNCIKICB2aWV3Qm94PSIwIDAgMjQgMjQiCiAgZmlsbD0ibm9uZSIKICBzdHJva2U9ImN1cnJlbnRDb2xvciIKICBzdHJva2Utd2lkdGg9IjIiCiAgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIgogIHN0cm9rZS1saW5lam9pbj0icm91bmQiCj4KICA8cGF0aCBkPSJtNSA4IDYgNiIgLz4KICA8cGF0aCBkPSJtNCAxNCA2LTYgMi0zIiAvPgogIDxwYXRoIGQ9Ik0yIDVoMTIiIC8+CiAgPHBhdGggZD0iTTcgMmgxIiAvPgogIDxwYXRoIGQ9Im0yMiAyMi01LTEwLTUgMTAiIC8+CiAgPHBhdGggZD0iTTE0IDE4aDYiIC8+Cjwvc3ZnPgo="
+    };
+    const embeddedIconLicense = "SVNDIExpY2Vuc2UKCkNvcHlyaWdodCAoYykgMjAyNiBMdWNpZGUgSWNvbnMgYW5kIENvbnRyaWJ1dG9ycwoKUGVybWlzc2lvbiB0byB1c2UsIGNvcHksIG1vZGlmeSwgYW5kL29yIGRpc3RyaWJ1dGUgdGhpcyBzb2Z0d2FyZSBmb3IgYW55CnB1cnBvc2Ugd2l0aCBvciB3aXRob3V0IGZlZSBpcyBoZXJlYnkgZ3JhbnRlZCwgcHJvdmlkZWQgdGhhdCB0aGUgYWJvdmUKY29weXJpZ2h0IG5vdGljZSBhbmQgdGhpcyBwZXJtaXNzaW9uIG5vdGljZSBhcHBlYXIgaW4gYWxsIGNvcGllcy4KClRIRSBTT0ZUV0FSRSBJUyBQUk9WSURFRCAiQVMgSVMiIEFORCBUSEUgQVVUSE9SIERJU0NMQUlNUyBBTEwgV0FSUkFOVElFUwpXSVRIIFJFR0FSRCBUTyBUSElTIFNPRlRXQVJFIElOQ0xVRElORyBBTEwgSU1QTElFRCBXQVJSQU5USUVTIE9GCk1FUkNIQU5UQUJJTElUWSBBTkQgRklUTkVTUy4gSU4gTk8gRVZFTlQgU0hBTEwgVEhFIEFVVEhPUiBCRSBMSUFCTEUgRk9SCkFOWSBTUEVDSUFMLCBESVJFQ1QsIElORElSRUNULCBPUiBDT05TRVFVRU5USUFMIERBTUFHRVMgT1IgQU5ZIERBTUFHRVMKV0hBVFNPRVZFUiBSRVNVTFRJTkcgRlJPTSBMT1NTIE9GIFVTRSwgREFUQSBPUiBQUk9GSVRTLCBXSEVUSEVSIElOIEFOCkFDVElPTiBPRiBDT05UUkFDVCwgTkVHTElHRU5DRSBPUiBPVEhFUiBUT1JUSU9VUyBBQ1RJT04sIEFSSVNJTkcgT1VUIE9GCk9SIElOIENPTk5FQ1RJT04gV0lUSCBUSEUgVVNFIE9SIFBFUkZPUk1BTkNFIE9GIFRISVMgU09GVFdBUkUuCgotLS0KClRoZSBmb2xsb3dpbmcgTHVjaWRlIGljb25zIGFyZSBkZXJpdmVkIGZyb20gdGhlIEZlYXRoZXIgcHJvamVjdDoKCmFpcnBsYXksIGFsZXJ0LWNpcmNsZSwgYWxlcnQtb2N0YWdvbiwgYWxlcnQtdHJpYW5nbGUsIGFwZXJ0dXJlLCBhcnJvdy1kb3duLWNpcmNsZSwgYXJyb3ctZG93bi1sZWZ0LCBhcnJvdy1kb3duLXJpZ2h0LCBhcnJvdy1kb3duLCBhcnJvdy1sZWZ0LWNpcmNsZSwgYXJyb3ctbGVmdCwgYXJyb3ctcmlnaHQtY2lyY2xlLCBhcnJvdy1yaWdodCwgYXJyb3ctdXAtY2lyY2xlLCBhcnJvdy11cC1sZWZ0LCBhcnJvdy11cC1yaWdodCwgYXJyb3ctdXAsIGF0LXNpZ24sIGNhbGVuZGFyLCBjYXN0LCBjaGVjaywgY2hldnJvbi1kb3duLCBjaGV2cm9uLWxlZnQsIGNoZXZyb24tcmlnaHQsIGNoZXZyb24tdXAsIGNoZXZyb25zLWRvd24sIGNoZXZyb25zLWxlZnQsIGNoZXZyb25zLXJpZ2h0LCBjaGV2cm9ucy11cCwgY2lyY2xlLCBjbGlwYm9hcmQsIGNsb2NrLCBjb2RlLCBjb2x1bW5zLCBjb21tYW5kLCBjb21wYXNzLCBjb3JuZXItZG93bi1sZWZ0LCBjb3JuZXItZG93bi1yaWdodCwgY29ybmVyLWxlZnQtZG93biwgY29ybmVyLWxlZnQtdXAsIGNvcm5lci1yaWdodC1kb3duLCBjb3JuZXItcmlnaHQtdXAsIGNvcm5lci11cC1sZWZ0LCBjb3JuZXItdXAtcmlnaHQsIGNyb3NzaGFpciwgZGF0YWJhc2UsIGRpdmlkZS1jaXJjbGUsIGRpdmlkZS1zcXVhcmUsIGRvbGxhci1zaWduLCBkb3dubG9hZCwgZXh0ZXJuYWwtbGluaywgZmVhdGhlciwgZnJvd24sIGhhc2gsIGhlYWRwaG9uZXMsIGhlbHAtY2lyY2xlLCBpbmZvLCBpdGFsaWMsIGtleSwgbGF5b3V0LCBsaWZlLWJ1b3ksIGxpbmstMiwgbGluaywgbG9hZGVyLCBsb2NrLCBsb2ctaW4sIGxvZy1vdXQsIG1heGltaXplLCBtZWgsIG1pbmltaXplLCBtaW5pbWl6ZS0yLCBtaW51cy1jaXJjbGUsIG1pbnVzLXNxdWFyZSwgbWludXMsIG1vbml0b3IsIG1vb24sIG1vcmUtaG9yaXpvbnRhbCwgbW9yZS12ZXJ0aWNhbCwgbW92ZSwgbXVzaWMsIG5hdmlnYXRpb24tMiwgbmF2aWdhdGlvbiwgb2N0YWdvbiwgcGF1c2UtY2lyY2xlLCBwZXJjZW50LCBwbHVzLWNpcmNsZSwgcGx1cy1zcXVhcmUsIHBsdXMsIHBvd2VyLCByYWRpbywgcnNzLCBzZWFyY2gsIHNlcnZlciwgc2hhcmUsIHNob3BwaW5nLWJhZywgc2lkZWJhciwgc21hcnRwaG9uZSwgc21pbGUsIHNxdWFyZSwgdGFibGUtMiwgdGFibGV0LCB0YXJnZXQsIHRlcm1pbmFsLCB0cmFzaC0yLCB0cmFzaCwgdHJpYW5nbGUsIHR2LCB0eXBlLCB1cGxvYWQsIHgtY2lyY2xlLCB4LW9jdGFnb24sIHgtc3F1YXJlLCB4LCB6b29tLWluLCB6b29tLW91dAoKVGhlIE1JVCBMaWNlbnNlIChNSVQpIChmb3IgdGhlIGljb25zIGxpc3RlZCBhYm92ZSkKCkNvcHlyaWdodCAoYykgMjAxMy1wcmVzZW50IENvbGUgQmVtaXMKClBlcm1pc3Npb24gaXMgaGVyZWJ5IGdyYW50ZWQsIGZyZWUgb2YgY2hhcmdlLCB0byBhbnkgcGVyc29uIG9idGFpbmluZyBhIGNvcHkKb2YgdGhpcyBzb2Z0d2FyZSBhbmQgYXNzb2NpYXRlZCBkb2N1bWVudGF0aW9uIGZpbGVzICh0aGUgIlNvZnR3YXJlIiksIHRvIGRlYWwKaW4gdGhlIFNvZnR3YXJlIHdpdGhvdXQgcmVzdHJpY3Rpb24sIGluY2x1ZGluZyB3aXRob3V0IGxpbWl0YXRpb24gdGhlIHJpZ2h0cwp0byB1c2UsIGNvcHksIG1vZGlmeSwgbWVyZ2UsIHB1Ymxpc2gsIGRpc3RyaWJ1dGUsIHN1YmxpY2Vuc2UsIGFuZC9vciBzZWxsCmNvcGllcyBvZiB0aGUgU29mdHdhcmUsIGFuZCB0byBwZXJtaXQgcGVyc29ucyB0byB3aG9tIHRoZSBTb2Z0d2FyZSBpcwpmdXJuaXNoZWQgdG8gZG8gc28sIHN1YmplY3QgdG8gdGhlIGZvbGxvd2luZyBjb25kaXRpb25zOgoKVGhlIGFib3ZlIGNvcHlyaWdodCBub3RpY2UgYW5kIHRoaXMgcGVybWlzc2lvbiBub3RpY2Ugc2hhbGwgYmUgaW5jbHVkZWQgaW4gYWxsCmNvcGllcyBvciBzdWJzdGFudGlhbCBwb3J0aW9ucyBvZiB0aGUgU29mdHdhcmUuCgpUSEUgU09GVFdBUkUgSVMgUFJPVklERUQgIkFTIElTIiwgV0lUSE9VVCBXQVJSQU5UWSBPRiBBTlkgS0lORCwgRVhQUkVTUyBPUgpJTVBMSUVELCBJTkNMVURJTkcgQlVUIE5PVCBMSU1JVEVEIFRPIFRIRSBXQVJSQU5USUVTIE9GIE1FUkNIQU5UQUJJTElUWSwKRklUTkVTUyBGT1IgQSBQQVJUSUNVTEFSIFBVUlBPU0UgQU5EIE5PTklORlJJTkdFTUVOVC4gSU4gTk8gRVZFTlQgU0hBTEwgVEhFCkFVVEhPUlMgT1IgQ09QWVJJR0hUIEhPTERFUlMgQkUgTElBQkxFIEZPUiBBTlkgQ0xBSU0sIERBTUFHRVMgT1IgT1RIRVIKTElBQklMSVRZLCBXSEVUSEVSIElOIEFOIEFDVElPTiBPRiBDT05UUkFDVCwgVE9SVCBPUiBPVEhFUldJU0UsIEFSSVNJTkcgRlJPTSwKT1VUIE9GIE9SIElOIENPTk5FQ1RJT04gV0lUSCBUSEUgU09GVFdBUkUgT1IgVEhFIFVTRSBPUiBPVEhFUiBERUFMSU5HUyBJTiBUSEUKU09GVFdBUkUuCg==";
     const sectionIconLabels = {
       education: "학력 아이콘",
       career: "경력 아이콘",
@@ -286,6 +294,7 @@
     const original = resume.innerHTML;
     const saved = loadSavedResume();
     if (saved) resume.innerHTML = saved;
+    ensureIconLicenseNotice();
     removeDragFeatures();
     initializeContactIcons();
     initializeProjectBlocks();
@@ -317,7 +326,7 @@
         return localStorage.getItem(storageKey);
       } catch (error) {
         console.error(error);
-        setSaveStatus("브라우저 자동 저장을 사용할 수 없습니다. HTML 사본으로 저장해 주세요.", true);
+        setSaveStatus("브라우저 자동 저장을 사용할 수 없습니다. 브라우저 설정을 확인해 주세요.", true);
         return null;
       }
     }
@@ -331,6 +340,20 @@
       resume.querySelectorAll(".section-drag-handle, .career-drag-handle, .project-drag-handle, .drag-handle").forEach((handle) => handle.remove());
       resume.querySelectorAll('[draggable="true"]').forEach((element) => element.removeAttribute("draggable"));
     }
+    function resolveIconSource(source) {
+      if (document.documentElement.dataset.iconsEmbedded === "true") {
+        return embeddedIconSources[source] || source;
+      }
+      return source;
+    }
+    function ensureIconLicenseNotice() {
+      if (document.getElementById("lucideLicenseNotice")) return;
+      const licenseNotice = document.createElement("script");
+      licenseNotice.id = "lucideLicenseNotice";
+      licenseNotice.type = "text/plain";
+      licenseNotice.textContent = atob(embeddedIconLicense);
+      document.body.appendChild(licenseNotice);
+    }
     function initializeContactIcons() {
       const iconSources = ["icon/phone.svg", "icon/mail.svg"];
       resume.querySelectorAll(".contact-item").forEach((item, index) => {
@@ -338,7 +361,7 @@
         if (!oldIndicator || !iconSources[index]) return;
         oldIndicator.className = "contact-icon";
         oldIndicator.setAttribute("aria-hidden", "true");
-        oldIndicator.innerHTML = '<img src="' + iconSources[index] + '" alt="">';
+        oldIndicator.innerHTML = '<img src="' + resolveIconSource(iconSources[index]) + '" alt="">';
       });
     }
     function persistResume(showSuccess) {
@@ -352,7 +375,7 @@
         return true;
       } catch (error) {
         console.error(error);
-        setSaveStatus("자동 저장 공간이 부족합니다. HTML 사본을 저장해 주세요.", true);
+        setSaveStatus("자동 저장 공간이 부족합니다. 브라우저 저장 공간을 확인해 주세요.", true);
         return false;
       }
     }
@@ -419,7 +442,7 @@
           if (!icon.dataset.customIcon) {
             icon.classList.remove("custom-image");
             icon.classList.add("icon-image");
-            icon.innerHTML = '<img src="' + source + '" alt="">';
+            icon.innerHTML = '<img src="' + resolveIconSource(source) + '" alt="">';
           }
         });
       });
@@ -843,36 +866,6 @@
     }
     function closeHelpFromBackdrop(event) {
       if (event.target === event.currentTarget) closeHelp();
-    }
-    function buildHtmlSource() {
-      persistResume();
-      const clone = document.documentElement.cloneNode(true);
-      clone.querySelector("#resume").innerHTML = resume.innerHTML;
-      clone.querySelector("#saveStatus").textContent = "글자를 클릭해 수정하세요 · 자동 저장됩니다.";
-      clone.querySelector("#saveStatus").classList.remove("status-error");
-      clone.querySelector("#helpDialog").removeAttribute("open");
-      return "<!doctype html>\n" + clone.outerHTML;
-    }
-    function downloadResumeHtml() {
-      try {
-        const html = buildHtmlSource();
-        const blob = new Blob([html], { type: "text/html;charset=utf-8" });
-        const url = URL.createObjectURL(blob);
-        const link = document.createElement("a");
-        const rawName = resume.querySelector(".name").textContent.trim() || "나의";
-        const safeName = rawName.replace(/[\\/:*?"<>|]/g, "_");
-        link.href = url;
-        link.download = safeName + "_이력서.html";
-        document.body.appendChild(link);
-        link.click();
-        link.remove();
-        setTimeout(() => URL.revokeObjectURL(url), 1000);
-        setSaveStatus("HTML 사본 저장됨 · icon 폴더와 함께 보관하세요.");
-      } catch (error) {
-        console.error(error);
-        setSaveStatus("HTML 사본을 저장하지 못했습니다.", true);
-        alert("HTML 사본을 저장하지 못했습니다. 다시 시도해 주세요.");
-      }
     }
   </script>
 
