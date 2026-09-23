@@ -1,14 +1,12 @@
 # resume_builder
 
-## Preview
+## Web App
 
 <p align="center">
-  <a href="https://htmlpreview.github.io/?https://github.com/han942/resume_builder/blob/main/resume_template.html">
-    <strong>▶ 브라우저에서 이력서 예시 열기</strong>
+  <a href="https://han942.github.io/resume_builder/">
+    <strong>▶ GitHub Pages에서 이력서 편집기 열기</strong>
   </a>
 </p>
-
-위 링크에서는 별도 설치 없이 실제 `resume_template.html`을 열어 편집 기능과 인쇄 화면을 확인할 수 있습니다. GitHub README는 보안상 HTML과 iframe 실행을 허용하지 않기 때문에, 원본 파일을 HTMLPreview에서 렌더링하는 방식으로 연결했습니다.
 
 ## Purpose
 항상 단조롭고, 복잡한 국문 이력서가 불편하고 보기 힘들어서 개발한 이력서 양식입니다.  
