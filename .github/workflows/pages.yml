@@ -31,6 +31,7 @@ jobs:
           mkdir -p _site
           cp resume_template.html _site/index.html
           cp resume_template.html _site/resume_template.html
+          cp resume_template_compact.html _site/resume_template_compact.html
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v4
